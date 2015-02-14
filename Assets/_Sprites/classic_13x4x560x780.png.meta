@@ -1,0 +1,619 @@
+fileFormatVersion: 2
+guid: 6175eaeab8fd34e4d8c039ddcde997c8
+TextureImporter:
+  fileIDToRecycleName:
+    21300000: classic_13x4x560x780_0
+    21300002: classic_13x4x560x780_1
+    21300004: classic_13x4x560x780_2
+    21300006: classic_13x4x560x780_3
+    21300008: classic_13x4x560x780_4
+    21300010: classic_13x4x560x780_5
+    21300012: classic_13x4x560x780_6
+    21300014: classic_13x4x560x780_7
+    21300016: classic_13x4x560x780_8
+    21300018: classic_13x4x560x780_9
+    21300020: classic_13x4x560x780_10
+    21300022: classic_13x4x560x780_11
+    21300024: classic_13x4x560x780_12
+    21300026: classic_13x4x560x780_13
+    21300028: classic_13x4x560x780_14
+    21300030: classic_13x4x560x780_15
+    21300032: classic_13x4x560x780_16
+    21300034: classic_13x4x560x780_17
+    21300036: classic_13x4x560x780_18
+    21300038: classic_13x4x560x780_19
+    21300040: classic_13x4x560x780_20
+    21300042: classic_13x4x560x780_21
+    21300044: classic_13x4x560x780_22
+    21300046: classic_13x4x560x780_23
+    21300048: classic_13x4x560x780_24
+    21300050: classic_13x4x560x780_25
+    21300052: classic_13x4x560x780_26
+    21300054: classic_13x4x560x780_27
+    21300056: classic_13x4x560x780_28
+    21300058: classic_13x4x560x780_29
+    21300060: classic_13x4x560x780_30
+    21300062: classic_13x4x560x780_31
+    21300064: classic_13x4x560x780_32
+    21300066: classic_13x4x560x780_33
+    21300068: classic_13x4x560x780_34
+    21300070: classic_13x4x560x780_35
+    21300072: classic_13x4x560x780_36
+    21300074: classic_13x4x560x780_37
+    21300076: classic_13x4x560x780_38
+    21300078: classic_13x4x560x780_39
+    21300080: classic_13x4x560x780_40
+    21300082: classic_13x4x560x780_41
+    21300084: classic_13x4x560x780_42
+    21300086: classic_13x4x560x780_43
+    21300088: classic_13x4x560x780_44
+    21300090: classic_13x4x560x780_45
+    21300092: classic_13x4x560x780_46
+    21300094: classic_13x4x560x780_47
+    21300096: classic_13x4x560x780_48
+    21300098: classic_13x4x560x780_49
+    21300100: classic_13x4x560x780_50
+    21300102: classic_13x4x560x780_51
+  serializedVersion: 2
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 1
+    linearTexture: 0
+    correctGamma: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: .25
+    normalMapFilter: 0
+  isReadable: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 0
+  seamlessCubemap: 0
+  textureFormat: -3
+  maxTextureSize: 1024
+  textureSettings:
+    filterMode: -1
+    aniso: 16
+    mipBias: -1
+    wrapMode: 1
+  nPOTScale: 0
+  lightmap: 0
+  compressionQuality: 50
+  spriteMode: 2
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: .5, y: .5}
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spritePixelsToUnits: 100
+  alphaIsTransparency: 1
+  textureType: 8
+  buildTargetSettings: []
+  spriteSheet:
+    sprites:
+    - name: classic_13x4x560x780_0
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 2340
+        width: 560
+        height: 780
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: classic_13x4x560x780_1
+      rect:
+        serializedVersion: 2
+        x: 560
+        y: 2340
+        width: 560
+        height: 780
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: classic_13x4x560x780_2
+      rect:
+        serializedVersion: 2
+        x: 1120
+        y: 2340
+        width: 560
+        height: 780
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: classic_13x4x560x780_3
+      rect:
+        serializedVersion: 2
+        x: 1680
+        y: 2340
+        width: 560
+        height: 780
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: classic_13x4x560x780_4
+      rect:
+        serializedVersion: 2
+        x: 2240
+        y: 2340
+        width: 560
+        height: 780
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: classic_13x4x560x780_5
+      rect:
+        serializedVersion: 2
+        x: 2800
+        y: 2340
+        width: 560
+        height: 780
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: classic_13x4x560x780_6
+      rect:
+        serializedVersion: 2
+        x: 3360
+        y: 2340
+        width: 560
+        height: 780
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: classic_13x4x560x780_7
+      rect:
+        serializedVersion: 2
+        x: 3920
+        y: 2340
+        width: 560
+        height: 780
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: classic_13x4x560x780_8
+      rect:
+        serializedVersion: 2
+        x: 4480
+        y: 2340
+        width: 560
+        height: 780
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: classic_13x4x560x780_9
+      rect:
+        serializedVersion: 2
+        x: 5040
+        y: 2340
+        width: 560
+        height: 780
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: classic_13x4x560x780_10
+      rect:
+        serializedVersion: 2
+        x: 5600
+        y: 2340
+        width: 560
+        height: 780
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: classic_13x4x560x780_11
+      rect:
+        serializedVersion: 2
+        x: 6160
+        y: 2340
+        width: 560
+        height: 780
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: classic_13x4x560x780_12
+      rect:
+        serializedVersion: 2
+        x: 6720
+        y: 2340
+        width: 560
+        height: 780
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: classic_13x4x560x780_13
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 1560
+        width: 560
+        height: 780
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: classic_13x4x560x780_14
+      rect:
+        serializedVersion: 2
+        x: 560
+        y: 1560
+        width: 560
+        height: 780
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: classic_13x4x560x780_15
+      rect:
+        serializedVersion: 2
+        x: 1120
+        y: 1560
+        width: 560
+        height: 780
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: classic_13x4x560x780_16
+      rect:
+        serializedVersion: 2
+        x: 1680
+        y: 1560
+        width: 560
+        height: 780
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: classic_13x4x560x780_17
+      rect:
+        serializedVersion: 2
+        x: 2240
+        y: 1560
+        width: 560
+        height: 780
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: classic_13x4x560x780_18
+      rect:
+        serializedVersion: 2
+        x: 2800
+        y: 1560
+        width: 560
+        height: 780
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: classic_13x4x560x780_19
+      rect:
+        serializedVersion: 2
+        x: 3360
+        y: 1560
+        width: 560
+        height: 780
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: classic_13x4x560x780_20
+      rect:
+        serializedVersion: 2
+        x: 3920
+        y: 1560
+        width: 560
+        height: 780
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: classic_13x4x560x780_21
+      rect:
+        serializedVersion: 2
+        x: 4480
+        y: 1560
+        width: 560
+        height: 780
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: classic_13x4x560x780_22
+      rect:
+        serializedVersion: 2
+        x: 5040
+        y: 1560
+        width: 560
+        height: 780
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: classic_13x4x560x780_23
+      rect:
+        serializedVersion: 2
+        x: 5600
+        y: 1560
+        width: 560
+        height: 780
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: classic_13x4x560x780_24
+      rect:
+        serializedVersion: 2
+        x: 6160
+        y: 1560
+        width: 560
+        height: 780
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: classic_13x4x560x780_25
+      rect:
+        serializedVersion: 2
+        x: 6720
+        y: 1560
+        width: 560
+        height: 780
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: classic_13x4x560x780_26
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 780
+        width: 560
+        height: 780
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: classic_13x4x560x780_27
+      rect:
+        serializedVersion: 2
+        x: 560
+        y: 780
+        width: 560
+        height: 780
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: classic_13x4x560x780_28
+      rect:
+        serializedVersion: 2
+        x: 1120
+        y: 780
+        width: 560
+        height: 780
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: classic_13x4x560x780_29
+      rect:
+        serializedVersion: 2
+        x: 1680
+        y: 780
+        width: 560
+        height: 780
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: classic_13x4x560x780_30
+      rect:
+        serializedVersion: 2
+        x: 2240
+        y: 780
+        width: 560
+        height: 780
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: classic_13x4x560x780_31
+      rect:
+        serializedVersion: 2
+        x: 2800
+        y: 780
+        width: 560
+        height: 780
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: classic_13x4x560x780_32
+      rect:
+        serializedVersion: 2
+        x: 3360
+        y: 780
+        width: 560
+        height: 780
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: classic_13x4x560x780_33
+      rect:
+        serializedVersion: 2
+        x: 3920
+        y: 780
+        width: 560
+        height: 780
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: classic_13x4x560x780_34
+      rect:
+        serializedVersion: 2
+        x: 4480
+        y: 780
+        width: 560
+        height: 780
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: classic_13x4x560x780_35
+      rect:
+        serializedVersion: 2
+        x: 5040
+        y: 780
+        width: 560
+        height: 780
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: classic_13x4x560x780_36
+      rect:
+        serializedVersion: 2
+        x: 5600
+        y: 780
+        width: 560
+        height: 780
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: classic_13x4x560x780_37
+      rect:
+        serializedVersion: 2
+        x: 6160
+        y: 780
+        width: 560
+        height: 780
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: classic_13x4x560x780_38
+      rect:
+        serializedVersion: 2
+        x: 6720
+        y: 780
+        width: 560
+        height: 780
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: classic_13x4x560x780_39
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 0
+        width: 560
+        height: 780
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: classic_13x4x560x780_40
+      rect:
+        serializedVersion: 2
+        x: 560
+        y: 0
+        width: 560
+        height: 780
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: classic_13x4x560x780_41
+      rect:
+        serializedVersion: 2
+        x: 1120
+        y: 0
+        width: 560
+        height: 780
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: classic_13x4x560x780_42
+      rect:
+        serializedVersion: 2
+        x: 1680
+        y: 0
+        width: 560
+        height: 780
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: classic_13x4x560x780_43
+      rect:
+        serializedVersion: 2
+        x: 2240
+        y: 0
+        width: 560
+        height: 780
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: classic_13x4x560x780_44
+      rect:
+        serializedVersion: 2
+        x: 2800
+        y: 0
+        width: 560
+        height: 780
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: classic_13x4x560x780_45
+      rect:
+        serializedVersion: 2
+        x: 3360
+        y: 0
+        width: 560
+        height: 780
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: classic_13x4x560x780_46
+      rect:
+        serializedVersion: 2
+        x: 3920
+        y: 0
+        width: 560
+        height: 780
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: classic_13x4x560x780_47
+      rect:
+        serializedVersion: 2
+        x: 4480
+        y: 0
+        width: 560
+        height: 780
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: classic_13x4x560x780_48
+      rect:
+        serializedVersion: 2
+        x: 5040
+        y: 0
+        width: 560
+        height: 780
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: classic_13x4x560x780_49
+      rect:
+        serializedVersion: 2
+        x: 5600
+        y: 0
+        width: 560
+        height: 780
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: classic_13x4x560x780_50
+      rect:
+        serializedVersion: 2
+        x: 6160
+        y: 0
+        width: 560
+        height: 780
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: classic_13x4x560x780_51
+      rect:
+        serializedVersion: 2
+        x: 6720
+        y: 0
+        width: 560
+        height: 780
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+  spritePackingTag: 
+  userData: 
