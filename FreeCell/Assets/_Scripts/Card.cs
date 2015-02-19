@@ -13,6 +13,8 @@ public enum CardColor {
 	Red
 }
 
+
+
 public class Card : MonoBehaviour {
 	[SerializeField]
 	Suit i_theSuit;
@@ -31,6 +33,7 @@ public class Card : MonoBehaviour {
 		set{
 			i_value = value;	}
 	}
+	public bool inMouseBound {get; set;}
 	
 
 	// Use this for initialization
@@ -49,6 +52,13 @@ public class Card : MonoBehaviour {
 		int suitInt = (int)this.theSuit;
 		if (suitInt % 2 != 0) return CardColor.Black;
 		return CardColor.Red;
+	}
+
+	void OnMouseEnter() {
+		inMouseBound = true;
+		}
+	void OnMouseExit(){
+		inMouseBound = false;
 	}
 
 }
