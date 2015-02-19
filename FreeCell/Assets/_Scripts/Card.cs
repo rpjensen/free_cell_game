@@ -45,7 +45,7 @@ public class Card : MonoBehaviour {
 
 
 	//Method that checks if the card color is black
-	public CardColor whichColor(){
+	public CardColor WhichColor(){
 		int suitInt = (int)this.theSuit;
 		if (suitInt % 2 != 0) return CardColor.Black;
 		return CardColor.Red;

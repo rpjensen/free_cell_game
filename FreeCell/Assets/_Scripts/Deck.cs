@@ -26,21 +26,21 @@ public class Deck : MonoBehaviour {
 				cards.Add(tempCard); //adds card to the deck
 				}
 			}
-		cards = shuffle (cards);
+		cards = Shuffle (cards);
 
 
 				
 	}
 
 	//method to draw a card
-	public GameObject drawCard(){
+	public GameObject DrawCard(){
 		GameObject tempCard = cards[cards.Count]; //gets card at the top of the deck
 		cards.RemoveAt (cards.Count); //removes the top card from the deck
 		return tempCard; //returns the card
 		}
 
 	//shuffle the deck
-	public List<GameObject> shuffle(List<GameObject> originalDeck){
+	public List<GameObject> Shuffle(List<GameObject> originalDeck){
 		List<GameObject> originList = originalDeck; //sets originList to the passed list
 		List<GameObject> tempCardList = new List<GameObject>(); //creates a second list
 		while (originList.Count > 0) { //runs as long as the original deck still has cards
