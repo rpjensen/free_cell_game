@@ -33,6 +33,7 @@ public class Card : MonoBehaviour {
 		set{
 			i_value = value;	}
 	}
+	public bool isSelected {get; set;}
 	public bool inMouseBound {get; set;}
 	
 
