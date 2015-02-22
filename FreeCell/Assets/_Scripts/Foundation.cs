@@ -12,4 +12,10 @@ public class Foundation : MonoBehaviour {
 	void Update () {
 	
 	}
+
+	public bool mouseInBounds {
+		get {
+			return true;
+		}
+	}
 }

@@ -33,7 +33,7 @@ public class Card : MonoBehaviour {
 		set{
 			i_value = value;	}
 	}
-	public bool inMouseBound {get; set;}
+	public bool mouseInBounds {get; set;}
 	
 
 	// Use this for initialization
@@ -55,10 +55,10 @@ public class Card : MonoBehaviour {
 	}
 
 	void OnMouseEnter() {
-		inMouseBound = true;
+		mouseInBounds = true;
 		}
 	void OnMouseExit(){
-		inMouseBound = false;
+		mouseInBounds = false;
 	}
 
 }
