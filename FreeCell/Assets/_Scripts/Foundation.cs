@@ -26,4 +26,8 @@ public class Foundation : MonoBehaviour {
 	public bool IsValidMove (Card card) {
 		return true;
 	}
+
+	public void AddCard(Card card) {
+
+	}
 }

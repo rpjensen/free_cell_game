@@ -13,7 +13,7 @@ public class FreeCell : MonoBehaviour {
 		}
 	}
 
-	public bool hasCard {
+	public bool validMove {
 		get {
 			return this.card != null;
 		}
