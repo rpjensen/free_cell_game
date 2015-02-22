@@ -18,4 +18,12 @@ public class Foundation : MonoBehaviour {
 			return true;
 		}
 	}
+
+	public Card GetTopCard () {
+		return new Card();
+	}
+
+	public bool IsValidMove (Card card) {
+		return true;
+	}
 }
