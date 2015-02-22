@@ -1,15 +1,324 @@
 ﻿using UnityEngine;
 using System.Collections;
+using System.Collections.Generic;
+
+public enum Location {
+	Tableau,
+	Foundation,
+	FreeCell,
+	None
+}
 
 public class Main : MonoBehaviour {
 
+	public GameObject[] goTableaus;
+	public GameObject[] goFoundations;
+	public GameObject[] goFreeCells;
+	public GameObject goDeck;
+
+
+	public bool _____________________;
+
+	public List<Tableau> tableaus;
+	public List<Foundation> foundations;
+	public List<FreeCell> freeCells;
+	public Deck deck;
+
+	// Undo stack
+	private Stack<UndoEntry> _undoManager;
+
+	// Holds a reference to the mouse click location and index (valid for a single update cycle)
+	private Location _mouseLocation;
+	private int _mouseIndex;
+
+	// Holds a reference to the currently selected card and its location/index
+	private Card _selectedCard;
+	private Location _selectedLocation;
+	private int _selectedIndex;
+
+	// Init the internal resources
+	void Awake() {
+		_undoManager = new Stack<UndoEntry> ();
+		tableaus = new List<Tableau>();
+		foundations = new List<Foundation>();
+		freeCells = new List<FreeCell>();
+	}
+
 	// Use this for initialization
 	void Start () {
-	
+		// init the deck
+		deck = goDeck.GetComponent<Deck> ();
+
+		// get the script objects for convenience
+		foreach (GameObject go in goTableaus) {
+			tableaus.Add(go.GetComponent<Tableau>());
+		}
+		foreach (GameObject go in goFoundations) {
+			foundations.Add(go.GetComponent<Foundation>());
+		}
+		foreach (GameObject go in goFreeCells) {
+			freeCells.Add(go.GetComponent<FreeCell>());
+		}
+
+		// thourougly shuffle the deck
+		deck.Shuffle ();
+		deck.Shuffle ();
+		deck.Shuffle ();
+		deck.Shuffle ();
+		deck.Shuffle ();
+
+		// deal the cards until they are all gone (add them to columns left to right)
+		int col = 0;
+		while (deck.cards.Count > 0) {
+			Card card = deck.DrawCard();
+			tableaus[col].AddCard(card);
+			// keep wrapping the column around
+			col = (col + 1) % tableaus.Count;
+		}
 	}
 	
 	// Update is called once per frame
 	void Update () {
-	
+		// If the mouse was clicked, dispatch to the appropriate function
+		if (Input.GetMouseButtonUp(0)) {
+			MouseClickDispatcher();
+		}
+	}
+
+	// Determines what action needs to be taken after a mouse click based on the context of the current frame
+	void MouseClickDispatcher() {
+		// Get the current mouse location (and set _mouseLocation/_mouseIndex for this frame)
+		Location location = mouseLocation;
+
+		// If there is no previously selected card
+		if (_selectedCard == null) {
+
+			//get the card at the mouse's current location
+			_selectedCard = GetCardAtLocation(location, _mouseIndex);
+			if (_selectedCard != null) {
+				//avoid a null pointer exception
+				_selectedCard.selected = true;
+			}
+			// Record the location/index of the selected card for later use (can be location.none)
+			_selectedIndex = _mouseIndex;
+			_selectedLocation = location;
+
+			return;
+
+
+		}
+		// else we have a selected card and are now clicking somewhere else
+
+		// If we are clicking the same card that was selected then deselect it
+		if (_mouseIndex == _selectedIndex && location.Equals(_selectedLocation)) {
+			_selectedCard.selected = false;
+			_selectedCard = null;
+			_selectedLocation = Location.None;
+			_selectedIndex = -1;
+			return;
+		}
+
+
+		// We have a selected card so now check if someone is trying to make a move
+		bool didMove = MoveCardToLocation(_selectedCard, location, _mouseIndex);// records whether the move was made
+		
+		if (didMove) {
+			// We have moved the card to the new location so remove it from the old location
+			RemoveCardAtLocation(_selectedLocation, _selectedIndex);
+			// Update the score
+			UpdateScore();
+			// Add the entry to the undo stack
+			_undoManager.Push(new UndoEntry(_selectedLocation, _selectedIndex, _mouseLocation, _mouseIndex));
+
+			// If it was moved un select the card
+			_selectedCard.selected = false;
+			_selectedCard = null;
+			_selectedIndex = -1;
+			_selectedLocation = Location.None;
+		}
+		else {
+			// If they didn't click in a valid move area don't clear the selected card
+			if (location.Equals(Location.None)) { return; }
+			PrintErrorMessage();
+		}
+		
+	}
+
+	void UndoMove() {
+		UndoEntry entry = _undoManager.Pop ();
+		Card card = RemoveCardAtLocation (entry.toLocation, entry.toIndex);
+		MoveCardToLocation(card, entry.fromLocation, entry.fromIndex, true);
+		
+		UpdateScore ();
+	}
+
+	void PrintErrorMessage() {
+		print ("Not a valid move");
+	}
+
+	void UpdateScore() {
+		print ("score updated");
+	}
+
+	private Card GetCardAtLocation(Location location, int index) {
+		Card card = null;
+		switch (location) {
+		case Location.None:
+			break;
+		case Location.Foundation:
+			// Select the top card in the foundation
+			card = foundations[_mouseIndex].GetTopCard();
+			break;
+		case Location.Tableau:
+			// Select the top card in the tableau
+			card = tableaus[_mouseIndex].GetTopCard();
+			break;
+		case Location.FreeCell:
+			// Select the only card in the free cell
+			card = freeCells[_mouseIndex].PeakCard();
+			break;
+		}
+		return card;
+	}
+
+	private Card RemoveCardAtLocation(Location location, int index) {
+		Card card = null;
+		switch (location) {
+		case Location.None:
+			print ("Trying to remove card at location none");
+			break;
+		case Location.Foundation:
+			card = foundations[_selectedIndex].RemoveTopCard();
+			break;
+		case Location.Tableau:
+			card = tableaus[_selectedIndex].RemoveTopCard();
+			break;
+		case Location.FreeCell:
+			card = freeCells[_selectedIndex].RemoveCard();
+			break;
+		}
+		return card;
+	}
+
+	private bool MoveCardToLocation(Card card, Location location, int index) {
+		return MoveCardToLocation (card, location, index, false);
+	}
+
+	private bool MoveCardToLocation(Card card, Location location, int index, bool forced) {
+		bool didMove = false;
+		switch (location) {
+		case Location.None:
+				didMove = false;
+				break;
+		case Location.Tableau:
+			// If the move is valid (or forced) then move it and set the flag
+			if (forced || tableaus[_mouseIndex].IsValidMove(card)) {
+				tableaus[_mouseIndex].AddCard(card);
+				didMove = true;
+			}
+			break;
+			// If the move is valid (or forced) then move it and set the flag
+		case Location.Foundation:
+			if (forced || foundations[_mouseIndex].IsValidMove(card)) {
+				foundations[_mouseIndex].AddCard(card);
+				didMove = true;
+			}
+			break;
+			// If the move is valid (or forced) move it and set the flag
+		case Location.FreeCell:
+			if (forced || freeCells[_mouseIndex].validMove) {
+				freeCells[_mouseIndex].AddCard(card);
+				didMove = true;
+			}
+			break;
+		}
+		return didMove;
+	}
+
+	private Location mouseLocation {
+		get {
+			int index = 0;// init index
+			// Foreach foundation, check if the card is in bounds
+			foreach (Foundation foundation in foundations) {
+				if (foundation.mouseInBounds) {
+					_mouseLocation = Location.Foundation;
+					_mouseIndex = index;
+					return _mouseLocation;
+				}
+				index++;
+			}
+			
+			index = 0;// init index
+			// Foreach tableau check if the mouse is in bounds
+			foreach (Tableau tableau in tableaus) {
+				if (tableau.mouseInBounds) {
+					_mouseLocation = Location.Tableau;
+					_mouseIndex = index;
+					return _mouseLocation;
+				}
+				index++;
+			}
+			
+			index = 0;
+			// Foreach freecell check if the mouse is in bounds
+			foreach (FreeCell freeCell in freeCells) {
+				if (freeCell.mouseInBounds) {
+					_mouseLocation = Location.FreeCell;
+					_mouseIndex = index;
+					return _mouseLocation;
+				}
+				index++;
+			}
+			
+			// The mouse isn't over anything I care about so return non
+			_mouseLocation = Location.None;
+			_mouseIndex = -1;
+			
+			return _mouseLocation;
+		}
+	}
+
+	public bool canUndo {
+		get {
+			return _undoManager.Count > 0;
+		}
+	}
+
+	private class UndoEntry {
+		private Location _fromLocation;
+		private int _fromIndex;
+		private Location _toLocation;
+		private int _toIndex;
+
+		public Location fromLocation {
+			get {
+				return _fromLocation;
+			}
+		}
+
+		public int fromIndex {
+			get {
+				return _fromIndex;
+			}
+		}
+
+		public Location toLocation {
+			get {
+				return _toLocation;
+			}
+		}
+
+		public int toIndex {
+			get {
+				return _toIndex;
+			}
+		}
+
+		public UndoEntry(Location fromLocation, int fromIndex, Location toLocation, int toIndex) {
+			this._fromLocation = fromLocation;
+			this._fromIndex = fromIndex;
+			this._toLocation = toLocation;
+			this._toIndex = toIndex;
+		}
 	}
 }

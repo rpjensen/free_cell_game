@@ -33,11 +33,12 @@ public class Deck : MonoBehaviour {
 	}
 
 	//method to draw a card
-	public GameObject DrawCard(){
-		GameObject tempCard = cards[cards.Count]; //gets card at the top of the deck
-		cards.RemoveAt (cards.Count); //removes the top card from the deck
-		return tempCard; //returns the card
+	public Card DrawCard(){
+		GameObject tempCard = cards[cards.Count-1]; //gets card at the top of the deck
+		cards.RemoveAt (cards.Count-1); //removes the top card from the deck
+		return tempCard.GetComponent<Card> (); //returns the card
 		}
+	
 
 	//shuffle the deck
 	public List<GameObject> Shuffle(List<GameObject> originalDeck){
@@ -50,6 +51,10 @@ public class Deck : MonoBehaviour {
 				}
 		return tempCardList; //returns the new shuffled list
 
+	}
+
+	public void Shuffle() {
+		cards = Shuffle (cards);
 	}
 	
 	// Update is called once per frame

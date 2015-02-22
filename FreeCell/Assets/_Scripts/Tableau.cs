@@ -74,4 +74,10 @@ public class Tableau : MonoBehaviour {
 		return false;
 	}
 
+	public bool mouseInBounds {
+		get {
+			return true;
+		}
+	}
+
 }
