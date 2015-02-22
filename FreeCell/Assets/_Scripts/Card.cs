@@ -61,4 +61,9 @@ public class Card : MonoBehaviour {
 		mouseInBounds = false;
 	}
 
+
+	public bool selected {
+				get;
+				set;
+	}
 }
