@@ -23,6 +23,10 @@ public class Foundation : MonoBehaviour {
 		return new Card();
 	}
 
+	public Card RemoveTopCard() {
+		return new Card ();
+	}
+
 	public bool IsValidMove (Card card) {
 		return true;
 	}
