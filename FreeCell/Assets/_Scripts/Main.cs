@@ -1,6 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 using System.Collections.Generic;
+using UnityEngine.UI;
 
 public enum Location {
 	Tableau,
@@ -9,12 +10,21 @@ public enum Location {
 	None
 }
 
+// Ryan Jensen
+// CSCI 373 Game Programming : Free Cell
+// This class represents the core game logic which includes moving cards, undoing cards, and updating the ui elements
+// February 27, 2014
 public class Main : MonoBehaviour {
 
 	public GameObject[] goTableaus;
 	public GameObject[] goFoundations;
 	public GameObject[] goFreeCells;
 	public GameObject goDeck;
+	public GameObject goScore;
+	public GameObject goTimer;
+	public GameObject goResetButton;
+	public GameObject goUndoButton;
+	public GameObject goBadMove;
 
 
 	public bool _____________________;
@@ -23,6 +33,10 @@ public class Main : MonoBehaviour {
 	public List<Foundation> foundations;
 	public List<FreeCell> freeCells;
 	public Deck deck;
+	public Text scoreLabel;
+	public int score;
+	public Text timer;
+	public Text badMove;
 
 	// Undo stack
 	private Stack<UndoEntry> _undoManager;
@@ -35,6 +49,8 @@ public class Main : MonoBehaviour {
 	private Card _selectedCard;
 	private Location _selectedLocation;
 	private int _selectedIndex;
+	private float _initTime;
+	private int _initDeckCount;
 
 	// Init the internal resources
 	void Awake() {
@@ -48,6 +64,27 @@ public class Main : MonoBehaviour {
 	void Start () {
 		// init the deck
 		deck = goDeck.GetComponent<Deck> ();
+		_initDeckCount = deck.cards.Count;
+
+		// init the score label
+		scoreLabel = goScore.GetComponent<Text> ();
+		scoreLabel.text = "Score: 0";
+
+		// init the timer
+		timer = goTimer.GetComponent<Text> ();
+		_initTime = Time.realtimeSinceStartup;
+
+		// init the undo button
+		Button undoButton = goUndoButton.GetComponent<Button> ();
+		undoButton.onClick.AddListener (() => UndoMove ());
+
+		// init the reset button
+		Button resetButton = goResetButton.GetComponent<Button> ();
+		resetButton.onClick.AddListener(() => GameOver());
+
+		// get the bad move text
+		badMove = goBadMove.GetComponent<Text> ();
+		badMove.text = "";
 
 		// get the script objects for convenience
 		foreach (GameObject go in goTableaus) {
@@ -79,6 +116,18 @@ public class Main : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
+		// Get the elapsed game time
+		float deltaT = Time.realtimeSinceStartup - _initTime;
+		// cast to int
+		int time = Mathf.FloorToInt (deltaT);
+		int secs = time % 60;// get secs
+		string sSecs = secs < 10 ? "0"+secs : secs.ToString();// add second zero if needed
+		int mins = (time / 60) % 60;// get mins
+		string sMins = mins < 10 ? "0"+mins : mins.ToString();// add second zero if needed
+		int hours = time / 3600;// get hours
+		// Update timer
+		timer.text = "Time: " + hours+":"+sMins+":"+sSecs;
+
 		// If the mouse was clicked, dispatch to the appropriate function
 		if (Input.GetMouseButtonUp(0)) {
 			MouseClickDispatcher();
@@ -135,6 +184,10 @@ public class Main : MonoBehaviour {
 			_selectedCard = null;
 			_selectedIndex = -1;
 			_selectedLocation = Location.None;
+
+			if (GetRemainingCards() <= 0) {
+				Invoke("GameOver", 5);
+			}
 		}
 		else {
 			// If they didn't click in a valid move area don't clear the selected card
@@ -144,22 +197,45 @@ public class Main : MonoBehaviour {
 		
 	}
 
+	// Undo the last move
 	void UndoMove() {
-		UndoEntry entry = _undoManager.Pop ();
-		Card card = RemoveCardAtLocation (entry.toLocation, entry.toIndex);
-		MoveCardToLocation(card, entry.fromLocation, entry.fromIndex, true);
-		
-		UpdateScore ();
+		if (this.canUndo) {
+			UndoEntry entry = _undoManager.Pop ();
+			Card card = RemoveCardAtLocation (entry.toLocation, entry.toIndex);
+			MoveCardToLocation(card, entry.fromLocation, entry.fromIndex, true);
+			
+			UpdateScore ();
+		}
 	}
 
+	// Print the bad move error message
 	void PrintErrorMessage() {
-		print ("Not a valid move");
+		badMove.text = "That move was not valid";
+		Invoke ("RemoveMessage", 2);
 	}
 
+	// Remove the error message
+	void RemoveErrorMessage() {
+		badMove.text = "";
+	}
+
+	// Update the score and label
 	void UpdateScore() {
-		print ("score updated");
+		score++;
+		scoreLabel.text = "Score: " + score;
 	}
 
+	// Return the number of cards left in the game
+	public int GetRemainingCards() {
+		int count = 0;
+
+		foreach (Foundation foundation in this.foundations) {
+			count += foundation.GetCardCount();
+		}
+		return _initDeckCount - count;
+	}
+
+	// Get the card at a given location and index (or null)
 	private Card GetCardAtLocation(Location location, int index) {
 		Card card = null;
 		switch (location) {
@@ -181,6 +257,7 @@ public class Main : MonoBehaviour {
 		return card;
 	}
 
+	// Remove the top card at a given location 
 	private Card RemoveCardAtLocation(Location location, int index) {
 		Card card = null;
 		switch (location) {
@@ -200,10 +277,12 @@ public class Main : MonoBehaviour {
 		return card;
 	}
 
+	// Move a card to the given location
 	private bool MoveCardToLocation(Card card, Location location, int index) {
 		return MoveCardToLocation (card, location, index, false);
 	}
 
+	// Move the card to the given location and choose whether to force add it or respect the game rules
 	private bool MoveCardToLocation(Card card, Location location, int index, bool forced) {
 		bool didMove = false;
 		switch (location) {
@@ -235,6 +314,7 @@ public class Main : MonoBehaviour {
 		return didMove;
 	}
 
+	// Set and get the mouseLocation from the last frame
 	private Location mouseLocation {
 		get {
 			int index = 0;// init index
@@ -278,12 +358,20 @@ public class Main : MonoBehaviour {
 		}
 	}
 
+	// get a boolean whether there is a move that can be undone
 	public bool canUndo {
 		get {
 			return _undoManager.Count > 0;
 		}
 	}
 
+	// Reload the level
+	void GameOver() {
+		Application.LoadLevel ("_GameScene");
+	}
+
+
+	// Represents one entry in the undo stack (it has two locations from and to)
 	private class UndoEntry {
 		private Location _fromLocation;
 		private int _fromIndex;
