@@ -34,4 +34,8 @@ public class Foundation : MonoBehaviour {
 	public void AddCard(Card card) {
 
 	}
+
+	public int GetCardCount() {
+		return 0;
+	}
 }
