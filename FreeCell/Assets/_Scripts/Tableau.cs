@@ -75,7 +75,8 @@ public class Tableau : MonoBehaviour {
 	}
 
 	public int GetCardCount() {
-		return 0;
+		cardStack.TrimToSize ();
+		return cardStack.Count;
 	}
 
 	public bool mouseInBounds {
