@@ -2,7 +2,7 @@
 using System.Collections;
 
 public class Tableau : MonoBehaviour {
-
+	
 	// This Card Stack will hold all the cards
 	// index 0 will be the bottom most card
 	// index cardStack.Count-1 will be the top-most upper
@@ -73,7 +73,7 @@ public class Tableau : MonoBehaviour {
 		}
 		return false;
 	}
-
+	
 	public int GetCardCount() {
 		cardStack.TrimToSize ();
 		return cardStack.Count;
@@ -84,5 +84,6 @@ public class Tableau : MonoBehaviour {
 			return true;
 		}
 	}
-
 }
+
+// Joseph El-Khouri
