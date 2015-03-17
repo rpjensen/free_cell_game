@@ -14,6 +14,10 @@ public enum CardColor {
 }
 
 
+// Joseph Tamberino
+// CSCI 373 Game Programming : Free Cell
+// This class represents the logic for each individual card.
+// March 17, 2015
 
 public class Card : MonoBehaviour {
 	[SerializeField]
@@ -33,13 +37,12 @@ public class Card : MonoBehaviour {
 		set{
 			i_value = value;	}
 	}
-	public bool isSelected {get; set;}
-	public bool inMouseBound {get; set;}
-	
+	public bool mouseInBounds {get; set;}
+	private bool i_selected;
 
-	// Use this for initialization
-	void Start () {
 
+	void Awake(){
+		selected = false;
 	}
 
 	// Update is called once per frame
@@ -56,10 +59,29 @@ public class Card : MonoBehaviour {
 	}
 
 	void OnMouseEnter() {
-		inMouseBound = true;
+		mouseInBounds = true;
 		}
 	void OnMouseExit(){
-		inMouseBound = false;
+		mouseInBounds = false;
 	}
+
+
+	public bool selected {
+				get {
+			return i_selected;
+				}
+				set {
+			i_selected = value;
+			Component halo = gameObject.GetComponent("Halo");
+
+			if (i_selected){
+				halo.GetType().GetProperty("enabled").SetValue(halo, true, null);
+			}
+			else {
+				halo.GetType().GetProperty("enabled").SetValue(halo, false, null);
+			}
+		}
+	}
+
 
 }

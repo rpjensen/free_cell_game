@@ -12,4 +12,30 @@ public class Foundation : MonoBehaviour {
 	void Update () {
 	
 	}
+
+	public bool mouseInBounds {
+		get {
+			return true;
+		}
+	}
+
+	public Card GetTopCard () {
+		return new Card();
+	}
+
+	public Card RemoveTopCard() {
+		return new Card ();
+	}
+
+	public bool IsValidMove (Card card) {
+		return true;
+	}
+
+	public void AddCard(Card card) {
+
+	}
+
+	public int GetCardCount() {
+		return 0;
+	}
 }

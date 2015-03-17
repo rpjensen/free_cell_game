@@ -22,13 +22,13 @@ public class Tableau : MonoBehaviour {
 	// You will use this without doing an IsValidMove 
 	// only when initializng it (or undoing I assume
 	// if we can implement that)
-	void AddCard (Card card) {
+	public void AddCard (Card card) {
 		cardStack.Add (card);
 	}
 
 	// This will remove the top upper facing card and
 	// return it.
-	Card RemoveTopCard () {
+	public Card RemoveTopCard () {
 		cardStack.TrimToSize ();
 		if (cardStack.Count == 0) {
 			return null;
@@ -39,7 +39,7 @@ public class Tableau : MonoBehaviour {
 	}
 
 	// Allows you to see the top card without removing it.
-	Card GetTopCard () {
+	public Card GetTopCard () {
 		cardStack.TrimToSize ();
 		if (cardStack.Count == 0) {
 			return null;
@@ -56,7 +56,7 @@ public class Tableau : MonoBehaviour {
 	 *  move a red 6 onto a black 7. If you have an empty Tableau pile
 	 *  then you can move any card there.
 	 */
-	bool IsValidMove (Card card) {
+	public bool IsValidMove (Card card) {
 		cardStack.TrimToSize ();
 		// if you have an empty stack, you can place a card there. 
 		if (cardStack.Count == 0) {
@@ -72,6 +72,16 @@ public class Tableau : MonoBehaviour {
 			return true;
 		}
 		return false;
+	}
+
+	public int GetCardCount() {
+		return 0;
+	}
+
+	public bool mouseInBounds {
+		get {
+			return true;
+		}
 	}
 
 }
