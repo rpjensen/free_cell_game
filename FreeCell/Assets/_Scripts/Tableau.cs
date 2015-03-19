@@ -88,7 +88,12 @@ public class Tableau : MonoBehaviour {
 
 	public bool mouseInBounds {
 		get {
-			return true;
+			cardStack.TrimToSize();
+			for (int i=0; i<cardStack.Capacity; i++) {
+				if (((Card)cardStack[i]).mouseInBounds)
+					return true;
+			}
+			return false;
 		}
 	}
 

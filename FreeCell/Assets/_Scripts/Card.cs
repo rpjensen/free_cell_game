@@ -60,7 +60,6 @@ public class Card : MonoBehaviour {
 
 	void OnMouseEnter() {
 		mouseInBounds = true;
-		print ("mouse over : " + theSuit + i_value + " " + WhichColor());
 	}
 	void OnMouseExit(){
 		mouseInBounds = false;

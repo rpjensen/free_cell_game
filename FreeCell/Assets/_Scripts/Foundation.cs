@@ -24,7 +24,7 @@ public class Foundation : MonoBehaviour {
 
 	public bool mouseInBounds {
 		get {
-			return true;
+			return false;
 		}
 	}
 
@@ -110,6 +110,8 @@ public class Foundation : MonoBehaviour {
 			position.z += 0.5f;
 		}
 	}
+
+
 }
 
 // Joseph El-Khouri

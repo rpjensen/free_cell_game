@@ -147,6 +147,12 @@ public class Main : MonoBehaviour {
 			_selectedIndex = _mouseIndex;
 			_selectedLocation = location;
 
+			if (_selectedCard != null) {
+				print("Location Info: " + _mouseLocation + " " + _mouseIndex);
+				print("Card Info: " + _selectedCard.theSuit + " " + _selectedCard.value + " " + _selectedCard.WhichColor());
+				print("");
+			}
+
 			return;
 
 
