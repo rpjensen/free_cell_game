@@ -8,11 +8,21 @@ public class Menu : MonoBehaviour {
 	public Button startText;
 	public Button highscoreText;
 	public Button quitText;
+	public Camera mainCamera;
+
+	private Color color;
+	private Color originalColor;
+	private Color darkColor;
+	private Color targetColor;
 
 	void Awake ()
 		
 	{
 		quitMenu.enabled = false;	
+		color = mainCamera.backgroundColor;
+		originalColor = mainCamera.backgroundColor;
+		darkColor = new Color (0.0353f, 0.31765f, 0f);
+		targetColor = mainCamera.backgroundColor;
 	}
 	
 	public void ExitPress()
@@ -22,6 +32,7 @@ public class Menu : MonoBehaviour {
 		startText.enabled = false; 
 		quitText.enabled = false;
 		highscoreText.enabled = false;
+		targetColor = darkColor;
 		
 	}
 	
@@ -32,7 +43,7 @@ public class Menu : MonoBehaviour {
 		startText.enabled = true;
 		quitText.enabled = true;
 		highscoreText.enabled = true;
-		
+		targetColor = originalColor;
 	}
 	
 	public void StartLevel ()
@@ -52,6 +63,14 @@ public class Menu : MonoBehaviour {
 	{
 		Application.Quit(); 
 		
+	}
+
+	public void FixedUpdate() {
+		float SMOOTH_FACTOR = 0.1f;
+		color.r = color.r + ((targetColor.r - color.r) * SMOOTH_FACTOR);
+		color.g = color.g + ((targetColor.g - color.g) * SMOOTH_FACTOR);
+		color.b = color.b + ((targetColor.b - color.b) * SMOOTH_FACTOR);
+		mainCamera.backgroundColor = color;
 	}
 
 }
