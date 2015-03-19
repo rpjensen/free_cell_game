@@ -146,6 +146,7 @@ public class Main : MonoBehaviour {
 				_selectedCard.selected = true;
 			}
 			// Record the location/index of the selected card for later use (can be location.none)
+
 			_selectedIndex = _mouseIndex;
 			_selectedLocation = location;
 
@@ -181,6 +182,7 @@ public class Main : MonoBehaviour {
 			// Update the score
 			UpdateScore();
 			// Add the entry to the undo stack
+
 			_undoManager.Push(new UndoEntry(_selectedLocation, _selectedIndex, _mouseLocation, _mouseIndex));
 
 			// If it was moved un select the card
@@ -257,13 +259,13 @@ public class Main : MonoBehaviour {
 			print ("Trying to remove card at location none");
 			break;
 		case Location.Foundation:
-			card = foundations[_selectedIndex].RemoveTopCard();
+			card = foundations[index].RemoveTopCard();
 			break;
 		case Location.Tableau:
-			card = tableaus[_selectedIndex].RemoveTopCard();
+			card = tableaus[index].RemoveTopCard();
 			break;
 		case Location.FreeCell:
-			card = freeCells[_selectedIndex].RemoveCard();
+			card = freeCells[index].RemoveCard();
 			break;
 		}
 		return card;
@@ -283,22 +285,22 @@ public class Main : MonoBehaviour {
 				break;
 		case Location.Tableau:
 			// If the move is valid (or forced) then move it and set the flag
-			if (forced || tableaus[_mouseIndex].IsValidMove(card)) {
-				tableaus[_mouseIndex].AddCard(card);
+			if (forced || tableaus[index].IsValidMove(card)) {
+				tableaus[index].AddCard(card);
 				didMove = true;
 			}
 			break;
 			// If the move is valid (or forced) then move it and set the flag
 		case Location.Foundation:
-			if (forced || foundations[_mouseIndex].IsValidMove(card)) {
-				foundations[_mouseIndex].AddCard(card);
+			if (forced || foundations[index].IsValidMove(card)) {
+				foundations[index].AddCard(card);
 				didMove = true;
 			}
 			break;
 			// If the move is valid (or forced) move it and set the flag
 		case Location.FreeCell:
-			if (forced || freeCells[_mouseIndex].validMove) {
-				freeCells[_mouseIndex].AddCard(card);
+			if (forced || freeCells[index].validMove) {
+				freeCells[index].AddCard(card);
 				didMove = true;
 			}
 			break;
