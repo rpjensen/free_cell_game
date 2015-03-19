@@ -105,6 +105,8 @@ public class Main : MonoBehaviour {
 			tableaus[col].AddCard(card);
 			// keep wrapping the column around
 			col = (col + 1) % tableaus.Count;
+			// used this instead of the above code to test moving from and to empty tableaus
+			// col = (col + 1) % (tableaus.Count-1);
 		}
 		Main.gameStarted = true;
 	}
@@ -241,7 +243,7 @@ public class Main : MonoBehaviour {
 			break;
 		case Location.FreeCell:
 			// Select the only card in the free cell
-			card = freeCells[_mouseIndex].PeakCard();
+			card = freeCells[_mouseIndex].PeekCard();
 			break;
 		}
 		return card;

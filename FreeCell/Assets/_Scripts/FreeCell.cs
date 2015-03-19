@@ -14,19 +14,21 @@ public class FreeCell : MonoBehaviour {
 	// property that determines if the mouse is in the objects bounds
 	public bool mouseInBounds {
 		get {
-			return _mouseInBounds;
+			if (card == null)
+				return _mouseInBounds;
+			return card.mouseInBounds;
 		}
 	}
 
 	// property that determines if a card can be added
 	public bool validMove {
 		get {
-			return this.card != null;
+			return (this.card == null);
 		}
 	}
 
 	// get a reference to the card without removing it
-	public Card PeakCard() {
+	public Card PeekCard() {
 		return this.card;
 	}
 
