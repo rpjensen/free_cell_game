@@ -147,11 +147,12 @@ public class Main : MonoBehaviour {
 			_selectedIndex = _mouseIndex;
 			_selectedLocation = location;
 
+			/* debugging 
 			if (_selectedCard != null) {
 				print("Location Info: " + _mouseLocation + " " + _mouseIndex);
 				print("Card Info: " + _selectedCard.theSuit + " " + _selectedCard.value + " " + _selectedCard.WhichColor());
 				print("");
-			}
+			} */
 
 			return;
 
@@ -160,7 +161,7 @@ public class Main : MonoBehaviour {
 		// else we have a selected card and are now clicking somewhere else
 
 		// If we are clicking the same card that was selected then deselect it
-		if (_mouseIndex == _selectedIndex && location.Equals(_selectedLocation)) {
+		if (_mouseIndex == _selectedIndex && location.Equals(_selectedLocation) || (mouseLocation == Location.None)) {
 			_selectedCard.selected = false;
 			_selectedCard = null;
 			_selectedLocation = Location.None;
