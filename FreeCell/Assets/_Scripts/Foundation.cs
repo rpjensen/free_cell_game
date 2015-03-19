@@ -13,7 +13,7 @@ public class Foundation : MonoBehaviour {
 	public Suit suit;
 
 	// Use this for initialization
-	void Start () {
+	void Awake () {
 		cardStack = new ArrayList ();
 	}
 	

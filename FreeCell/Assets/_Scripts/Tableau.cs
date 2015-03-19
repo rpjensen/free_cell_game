@@ -9,9 +9,12 @@ public class Tableau : MonoBehaviour {
 	// facing card.
 	private ArrayList cardStack;
 
+	void Awake() {
+		cardStack = new ArrayList ();
+	}
+
 	// Use this for initialization
 	void Start () {
-		cardStack = new ArrayList ();
 	}
 	
 	// Update is called once per frame
