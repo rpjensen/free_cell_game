@@ -2,6 +2,10 @@
 using System.Collections;
 using System.Collections.Generic;
 
+// Joseph Tamberino
+// CSCI 373 Game Programming : Free Cell
+// This class represents the logic for each individual card.
+// March 19, 2015
 public class Deck : MonoBehaviour {
 	// set in Unity inspector
 	public List<Sprite> cardSprites;
