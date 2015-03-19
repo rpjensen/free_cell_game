@@ -24,7 +24,6 @@ public class Main : MonoBehaviour {
 	public GameObject goTimer;
 	public GameObject goResetButton;
 	public GameObject goUndoButton;
-	public GameObject goBadMove;
 
 
 	public bool _____________________;
@@ -36,7 +35,6 @@ public class Main : MonoBehaviour {
 	public Text scoreLabel;
 	public int score;
 	public Text timer;
-	public Text badMove;
 
 	// Undo stack
 	private Stack<UndoEntry> _undoManager;
@@ -81,10 +79,6 @@ public class Main : MonoBehaviour {
 		// init the reset button
 		Button resetButton = goResetButton.GetComponent<Button> ();
 		resetButton.onClick.AddListener(() => GameOver());
-
-		// get the bad move text
-		badMove = goBadMove.GetComponent<Text> ();
-		badMove.text = "";
 
 		// get the script objects for convenience
 		foreach (GameObject go in goTableaus) {
@@ -192,7 +186,6 @@ public class Main : MonoBehaviour {
 		else {
 			// If they didn't click in a valid move area don't clear the selected card
 			if (location.Equals(Location.None)) { return; }
-			PrintErrorMessage();
 		}
 		
 	}
@@ -206,17 +199,6 @@ public class Main : MonoBehaviour {
 			
 			UpdateScore ();
 		}
-	}
-
-	// Print the bad move error message
-	void PrintErrorMessage() {
-		badMove.text = "That move was not valid";
-		Invoke ("RemoveMessage", 2);
-	}
-
-	// Remove the error message
-	void RemoveErrorMessage() {
-		badMove.text = "";
 	}
 
 	// Update the score and label
