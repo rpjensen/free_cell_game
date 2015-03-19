@@ -41,8 +41,10 @@ public class FreeCell : MonoBehaviour {
 	public bool AddCard(Card card) {
 		if (this.card != null) { return false; }
 		this.card = card;
-		card.transform.parent = this.gameObject.transform;
-		card.transform.localPosition = Vector3.zero;
+		card.gameObject.transform.parent = this.gameObject.transform;
+		Vector3 pos = Vector3.zero;
+		pos.z = -5;
+		card.gameObject.transform.localPosition = pos;
 		return true;
 	}
 
