@@ -5,7 +5,7 @@ public class Tableau : MonoBehaviour {
 	
 	// This Card Stack will hold all the cards
 	// index 0 will be the bottom most card
-	// index cardStack.Count-1 will be the top-most upper
+	// index cardStack[Count-1] will be the top-most upper
 	// facing card.
 	private ArrayList cardStack;
 
@@ -23,7 +23,10 @@ public class Tableau : MonoBehaviour {
 	// only when initializng it (or undoing I assume
 	// if we can implement that)
 	public void AddCard (Card card) {
+		// make the new card parent's transform this object's transform
+		card.gameObject.transform.parent = this.gameObject.transform;
 		cardStack.Add (card);
+		LayerCalculate ();
 	}
 
 	// This will remove the top upper facing card and
@@ -35,6 +38,7 @@ public class Tableau : MonoBehaviour {
 		}
 		Card returnMe = (Card)cardStack [cardStack.Count - 1];
 		cardStack.RemoveAt (cardStack.Count - 1);
+		LayerCalculate ();
 		return returnMe;
 	}
 
@@ -82,6 +86,21 @@ public class Tableau : MonoBehaviour {
 	public bool mouseInBounds {
 		get {
 			return true;
+		}
+	}
+
+	// This positions all the cards visually under one another.
+	public void LayerCalculate () {
+		// go through every card, starting at the top
+		// put the local transform at 0,0,0 for the first card
+		// and then move each card after it away from the camera by 0.5 (+Z) and
+		// down (-Y) by 0.5 units.
+		Vector3 position = Vector3.zero;
+		cardStack.TrimToSize();
+		for (int i=0; i<cardStack.Count; i++) {
+			((Card)cardStack[i]).gameObject.transform.localPosition = position;
+			position.z += 0.5f;
+			position.y -= 0.5f;
 		}
 	}
 }

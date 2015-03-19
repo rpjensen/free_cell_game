@@ -46,6 +46,7 @@ public class Foundation : MonoBehaviour {
 		}
 		Card returnMe = (Card)cardStack [cardStack.Count - 1];
 		cardStack.RemoveAt (cardStack.Count - 1);
+		LayerCalculate ();
 		return returnMe;
 	}
 
@@ -89,11 +90,25 @@ public class Foundation : MonoBehaviour {
 	// if we can implement that)
 	public void AddCard (Card card) {
 		cardStack.Add (card);
+		LayerCalculate ();
 	}
 
 	public int GetCardCount() {
 		cardStack.TrimToSize ();
 		return cardStack.Count;
+	}
+
+	// This positions all the cards directly under one another.
+	public void LayerCalculate () {
+		// go through every card, starting at the top
+		// put the local transform at 0,0,0 for the first card
+		// and then move each card after it away from the camera by 0.5 (+Z)
+		Vector3 position = Vector3.zero;
+		cardStack.TrimToSize();
+		for (int i=0; i<cardStack.Count; i++) {
+			((Card)cardStack[i]).gameObject.transform.localPosition = position;
+			position.z += 0.5f;
+		}
 	}
 }
 
