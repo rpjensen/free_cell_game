@@ -60,8 +60,11 @@ public class Foundation : MonoBehaviour {
 	 *	to win the game.
 	 */
 	public bool IsValidMove (Card card) {
-		int ACE_VALUE = 14;  
-		int MAX_CARD_NUMBER = 14;
+		int ACE_VALUE = 1;  
+		int MAX_CARD_NUMBER = 13;
+		// 11 = J
+		// 12 = Q
+		// 13 = K
 
 		cardStack.TrimToSize ();
 		if (cardStack.Count == 0) {
