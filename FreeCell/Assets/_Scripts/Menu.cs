@@ -4,14 +4,14 @@ using System.Collections;
 
 public class Menu : MonoBehaviour {
 
-	public Canvas quitMenu;
+	public Canvas quitMenu; 
 	public Button startText;
 	public Button quitText;
 
 	void Start ()
 		
 	{
-		quitMenu = quitMenu.GetComponent<Canvas>();
+		quitMenu = quitMenu.GetComponent<Canvas>(); 
 		startText = startText.GetComponent<Button> ();
 		quitText = quitText.GetComponent<Button> ();
 		quitMenu.enabled = false;
