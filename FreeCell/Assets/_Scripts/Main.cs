@@ -367,6 +367,8 @@ public class Main : MonoBehaviour {
 
 	// Reload the level
 	void GameOver() {
+		// Invoke high scores here
+		// 
 		Application.LoadLevel ("_GameScene");
 	}
 
