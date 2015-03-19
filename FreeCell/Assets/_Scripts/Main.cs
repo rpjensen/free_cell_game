@@ -24,7 +24,7 @@ public class Main : MonoBehaviour {
 	public GameObject goTimer;
 	public GameObject goResetButton;
 	public GameObject goUndoButton;
-
+	public static bool gameStarted = false;
 
 	public bool _____________________;
 
@@ -106,6 +106,7 @@ public class Main : MonoBehaviour {
 			// keep wrapping the column around
 			col = (col + 1) % tableaus.Count;
 		}
+		Main.gameStarted = true;
 	}
 	
 	// Update is called once per frame
