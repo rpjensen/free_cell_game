@@ -108,7 +108,7 @@ public class Tableau : MonoBehaviour {
 		for (int i=0; i<cardStack.Count; i++) {
 			((Card)cardStack[i]).gameObject.transform.localPosition = position;
 			position.z -= 0.2f;
-			position.y -= 0.5f;
+			position.y -= 1f;
 		}
 	}
 }
