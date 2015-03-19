@@ -10,6 +10,8 @@ public enum Location {
 	None
 }
 
+
+
 // Ryan Jensen
 // CSCI 373 Game Programming : Free Cell
 // This class represents the core game logic which includes moving cards, undoing cards, and updating the ui elements
@@ -404,5 +406,11 @@ public class Main : MonoBehaviour {
 			this._toLocation = toLocation;
 			this._toIndex = toIndex;
 		}
+	}
+
+	// calls to this are made by the buttons
+	public void LoadMenu(int menuIndex) {
+		if (menuIndex == 0)
+			Application.LoadLevel ("_MainMenu"); 
 	}
 }
