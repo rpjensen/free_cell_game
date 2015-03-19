@@ -6,16 +6,13 @@ public class Menu : MonoBehaviour {
 
 	public Canvas quitMenu; 
 	public Button startText;
+	public Button highscoreText;
 	public Button quitText;
 
-	void Start ()
+	void Awake ()
 		
 	{
-		quitMenu = quitMenu.GetComponent<Canvas>(); 
-		startText = startText.GetComponent<Button> ();
-		quitText = quitText.GetComponent<Button> ();
-		quitMenu.enabled = false;
-		
+		quitMenu.enabled = false;	
 	}
 	
 	public void ExitPress()
@@ -24,6 +21,7 @@ public class Menu : MonoBehaviour {
 		quitMenu.enabled = true; 
 		startText.enabled = false; 
 		quitText.enabled = false;
+		highscoreText.enabled = false;
 		
 	}
 	
@@ -33,6 +31,7 @@ public class Menu : MonoBehaviour {
 		quitMenu.enabled = false;
 		startText.enabled = true;
 		quitText.enabled = true;
+		highscoreText.enabled = true;
 		
 	}
 	
@@ -40,6 +39,12 @@ public class Menu : MonoBehaviour {
 		
 	{
 		Application.LoadLevel ("_GameScene"); 
+	}
+
+	public void LoadHighScore ()
+		
+	{
+		Application.LoadLevel ("_HighScores"); 
 	}
 	
 	public void ExitGame () 
