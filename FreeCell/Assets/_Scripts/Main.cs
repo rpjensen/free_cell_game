@@ -218,6 +218,7 @@ public class Main : MonoBehaviour {
 	// Update the score and label
 	void UpdateScore() {
 		score++;
+		print ("Score updated: " + score);
 		scoreLabel.text = "Score: " + score;
 	}
 
@@ -239,15 +240,15 @@ public class Main : MonoBehaviour {
 			break;
 		case Location.Foundation:
 			// Select the top card in the foundation
-			card = foundations[_mouseIndex].GetTopCard();
+			card = foundations[index].GetTopCard();
 			break;
 		case Location.Tableau:
 			// Select the top card in the tableau
-			card = tableaus[_mouseIndex].GetTopCard();
+			card = tableaus[index].GetTopCard();
 			break;
 		case Location.FreeCell:
 			// Select the only card in the free cell
-			card = freeCells[_mouseIndex].PeekCard();
+			card = freeCells[index].PeekCard();
 			break;
 		}
 		return card;
@@ -365,7 +366,13 @@ public class Main : MonoBehaviour {
 	void GameOver() {
 		// Invoke high scores here
 		// 
-		Application.LoadLevel ("_GameScene");
+		Application.LoadLevel ("_HighScores");
+	}
+	
+	// calls to this are made by the buttons
+	public void LoadMenu(int menuIndex) {
+		if (menuIndex == 0)
+			Application.LoadLevel ("_MainMenu"); 
 	}
 
 
@@ -408,9 +415,4 @@ public class Main : MonoBehaviour {
 		}
 	}
 
-	// calls to this are made by the buttons
-	public void LoadMenu(int menuIndex) {
-		if (menuIndex == 0)
-			Application.LoadLevel ("_MainMenu"); 
-	}
 }
