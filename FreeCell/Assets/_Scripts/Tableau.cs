@@ -93,11 +93,12 @@ public class Tableau : MonoBehaviour {
 			cardStack.TrimToSize();
 			// if we have cards...
 			if (cardStack.Count != 0) {
-				for (int i=0; i<cardStack.Count; i++) {
+				return ((Card)cardStack[cardStack.Count-1]).mouseInBounds;
+				/*for (int i=0; i<cardStack.Count; i++) {
 					if (((Card)cardStack[i]).mouseInBounds)
 						return true;
 				}
-				return false;
+				return false;*/
 			}
 			// otherwise, use the tracking bool for the base area
 			return mouseOverBase;
