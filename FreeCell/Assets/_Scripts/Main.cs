@@ -82,7 +82,8 @@ public class Main : MonoBehaviour {
 
 		// init the reset button
 		Button resetButton = goResetButton.GetComponent<Button> ();
-		resetButton.onClick.AddListener(() => GameOver());
+		resetButton.onClick.AddListener(() => ResetGame());
+
 
 		goWinnerLabel.SetActive (false);
 		goValidMove.SetActive (false);
@@ -383,6 +384,10 @@ public class Main : MonoBehaviour {
 		// Invoke high scores here
 		// 
 		Application.LoadLevel ("_HighScores");
+	}
+
+	void ResetGame() {
+		Application.LoadLevel ("_GameScene");
 	}
 	
 	// calls to this are made by the buttons
