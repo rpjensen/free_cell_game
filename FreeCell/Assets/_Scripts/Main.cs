@@ -26,6 +26,8 @@ public class Main : MonoBehaviour {
 	public GameObject goTimer;
 	public GameObject goResetButton;
 	public GameObject goUndoButton;
+	public GameObject goWinnerLabel;
+	public GameObject goValidMove;
 	public static bool gameStarted = false;
 
 	public bool _____________________;
@@ -81,6 +83,9 @@ public class Main : MonoBehaviour {
 		// init the reset button
 		Button resetButton = goResetButton.GetComponent<Button> ();
 		resetButton.onClick.AddListener(() => GameOver());
+
+		goWinnerLabel.SetActive (false);
+		goValidMove.SetActive (false);
 
 		// get the script objects for convenience
 		foreach (GameObject go in goTableaus) {
@@ -194,12 +199,15 @@ public class Main : MonoBehaviour {
 			_selectedLocation = Location.None;
 
 			if (GetRemainingCards() <= 0) {
+				goWinnerLabel.SetActive(true);
 				Invoke("GameOver", 5);
 			}
 		}
 		else {
 			// If they didn't click in a valid move area don't clear the selected card
 			if (location.Equals(Location.None)) { return; }
+			EnableBadMove();
+
 		}
 		
 	}
@@ -220,6 +228,15 @@ public class Main : MonoBehaviour {
 		score++;
 		print ("Score updated: " + score);
 		scoreLabel.text = "Score: " + score;
+	}
+
+	void EnableBadMove() {
+		goValidMove.SetActive (true);
+		Invoke ("DisableBadMove", 2);
+	}
+
+	void DisableBadMove() {
+		goValidMove.SetActive (false);
 	}
 
 	// Return the number of cards left in the game
@@ -259,7 +276,6 @@ public class Main : MonoBehaviour {
 		Card card = null;
 		switch (location) {
 		case Location.None:
-			print ("Trying to remove card at location none");
 			break;
 		case Location.Foundation:
 			card = foundations[index].RemoveTopCard();
