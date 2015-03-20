@@ -8,13 +8,15 @@ public class Foundation : MonoBehaviour {
 	// index cardStack.Count-1 will be the top-most upper
 	// facing card.
 	private ArrayList cardStack;
-
+	private bool mouseOverBase;
+	 
 	// Which suit of ACE will be placed here first?
 	public Suit suit;
 
 	// Use this for initialization
-	void Start () {
+	void Awake () {
 		cardStack = new ArrayList ();
+		mouseOverBase = false;
 	}
 	
 	// Update is called once per frame
@@ -24,10 +26,23 @@ public class Foundation : MonoBehaviour {
 
 	public bool mouseInBounds {
 		get {
-			return true;
+			cardStack.TrimToSize();
+			// if we have cards...
+            // use the top card's mouseinbounds property
+			if (cardStack.Count != 0)
+				return ((Card)cardStack[cardStack.Count-1]).mouseInBounds;
+			// otherwise, use the tracking bool for the base area
+			return mouseOverBase;
 		}
 	}
 
+	void OnMouseEnter() {
+		mouseOverBase = true;
+	}
+	void OnMouseExit(){
+		mouseOverBase = false;
+	}
+	
 	// Allows you to see the top card without removing it.
 	public Card GetTopCard () {
 		cardStack.TrimToSize ();
@@ -51,18 +66,14 @@ public class Foundation : MonoBehaviour {
 	}
 
 	// IsValidMove
-	// Using the rules from freecell-cardgame.com
+	// 
 	/*
-	 *  When the Free Cells are empty and all cards
-	 *	on the Tableau are arranged in 4 piles and each of
-	 *	the piles has been ordered in descending order with
-	 *	alternating red/black cards then the Tableau will
-	 *	clear itself, since at that point you are guaranteed
-	 *	to win the game.
+	 *  You stack them in order
+	 *  eg. A 2 of spades goes on an Ace of Spades
+	 *      a 6 of diamonds goes on a 5 of diamonds
 	 */
 	public bool IsValidMove (Card card) {
 		int ACE_VALUE = 1;  
-		int MAX_CARD_NUMBER = 13;
 		// 11 = J
 		// 12 = Q
 		// 13 = K
@@ -79,9 +90,8 @@ public class Foundation : MonoBehaviour {
 		// continue if we at least have an ace on here...
 
 		Card topCard = (Card)cardStack [cardStack.Count - 1];
-		if ((card.value == MAX_CARD_NUMBER - cardStack.Count) && (card.WhichColor() != topCard.WhichColor()))
+		if ((card.value == topCard.value + 1) && (card.theSuit == topCard.theSuit))
 			return true;
-
 		return false;
 	}
 
@@ -89,6 +99,7 @@ public class Foundation : MonoBehaviour {
 	// only when initializng it (or undoing I assume
 	// if we can implement that)
 	public void AddCard (Card card) {
+		card.gameObject.transform.parent = this.gameObject.transform;
 		cardStack.Add (card);
 		LayerCalculate ();
 	}
@@ -102,14 +113,16 @@ public class Foundation : MonoBehaviour {
 	public void LayerCalculate () {
 		// go through every card, starting at the top
 		// put the local transform at 0,0,0 for the first card
-		// and then move each card after it away from the camera by 0.5 (+Z)
+		// and then move each card after it towards the camera by 0.1 (-Z)
 		Vector3 position = Vector3.zero;
 		cardStack.TrimToSize();
 		for (int i=0; i<cardStack.Count; i++) {
 			((Card)cardStack[i]).gameObject.transform.localPosition = position;
-			position.z += 0.5f;
+			position.z -= 0.1f;
 		}
 	}
+
+
 }
 
 // Joseph El-Khouri

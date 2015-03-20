@@ -8,10 +8,15 @@ public class Tableau : MonoBehaviour {
 	// index cardStack[Count-1] will be the top-most upper
 	// facing card.
 	private ArrayList cardStack;
+	private bool mouseOverBase;
+
+	void Awake() {
+		cardStack = new ArrayList ();
+		mouseOverBase = false;
+	}
 
 	// Use this for initialization
 	void Start () {
-		cardStack = new ArrayList ();
 	}
 	
 	// Update is called once per frame
@@ -79,16 +84,33 @@ public class Tableau : MonoBehaviour {
 	}
 	
 	public int GetCardCount() {
-		cardStack.TrimToSize ();
+		cardStack.TrimToSize (); 
 		return cardStack.Count;
 	}
 
 	public bool mouseInBounds {
 		get {
-			return true;
+			cardStack.TrimToSize();
+			// if we have cards...
+			if (cardStack.Count != 0) {
+				for (int i=0; i<cardStack.Count; i++) {
+					if (((Card)cardStack[i]).mouseInBounds)
+						return true;
+				}
+				return false;
+			}
+			// otherwise, use the tracking bool for the base area
+			return mouseOverBase;
 		}
 	}
 
+	void OnMouseEnter() {
+		mouseOverBase = true;
+	}
+	void OnMouseExit(){
+		mouseOverBase = false;
+	}
+	
 	// This positions all the cards visually under one another.
 	public void LayerCalculate () {
 		// go through every card, starting at the top
@@ -99,8 +121,8 @@ public class Tableau : MonoBehaviour {
 		cardStack.TrimToSize();
 		for (int i=0; i<cardStack.Count; i++) {
 			((Card)cardStack[i]).gameObject.transform.localPosition = position;
-			position.z += 0.5f;
-			position.y -= 0.5f;
+			position.z -= 0.2f;
+			position.y -= 1.1f;
 		}
 	}
 }

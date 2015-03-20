@@ -10,6 +10,8 @@ public enum Location {
 	None
 }
 
+
+
 // Ryan Jensen
 // CSCI 373 Game Programming : Free Cell
 // This class represents the core game logic which includes moving cards, undoing cards, and updating the ui elements
@@ -24,8 +26,7 @@ public class Main : MonoBehaviour {
 	public GameObject goTimer;
 	public GameObject goResetButton;
 	public GameObject goUndoButton;
-	public GameObject goBadMove;
-
+	public static bool gameStarted = false;
 
 	public bool _____________________;
 
@@ -36,7 +37,6 @@ public class Main : MonoBehaviour {
 	public Text scoreLabel;
 	public int score;
 	public Text timer;
-	public Text badMove;
 
 	// Undo stack
 	private Stack<UndoEntry> _undoManager;
@@ -82,10 +82,6 @@ public class Main : MonoBehaviour {
 		Button resetButton = goResetButton.GetComponent<Button> ();
 		resetButton.onClick.AddListener(() => GameOver());
 
-		// get the bad move text
-		badMove = goBadMove.GetComponent<Text> ();
-		badMove.text = "";
-
 		// get the script objects for convenience
 		foreach (GameObject go in goTableaus) {
 			tableaus.Add(go.GetComponent<Tableau>());
@@ -111,7 +107,10 @@ public class Main : MonoBehaviour {
 			tableaus[col].AddCard(card);
 			// keep wrapping the column around
 			col = (col + 1) % tableaus.Count;
+			// used this instead of the above code to test moving from and to empty tableaus
+			// col = (col + 1) % (tableaus.Count-1);
 		}
+		Main.gameStarted = true;
 	}
 	
 	// Update is called once per frame
@@ -149,8 +148,16 @@ public class Main : MonoBehaviour {
 				_selectedCard.selected = true;
 			}
 			// Record the location/index of the selected card for later use (can be location.none)
+
 			_selectedIndex = _mouseIndex;
 			_selectedLocation = location;
+
+			/* debugging 
+			if (_selectedCard != null) {
+				print("Location Info: " + _mouseLocation + " " + _mouseIndex);
+				print("Card Info: " + _selectedCard.theSuit + " " + _selectedCard.value + " " + _selectedCard.WhichColor());
+				print("");
+			} */
 
 			return;
 
@@ -159,7 +166,7 @@ public class Main : MonoBehaviour {
 		// else we have a selected card and are now clicking somewhere else
 
 		// If we are clicking the same card that was selected then deselect it
-		if (_mouseIndex == _selectedIndex && location.Equals(_selectedLocation)) {
+		if (_mouseIndex == _selectedIndex && location.Equals(_selectedLocation) || (mouseLocation == Location.None)) {
 			_selectedCard.selected = false;
 			_selectedCard = null;
 			_selectedLocation = Location.None;
@@ -177,6 +184,7 @@ public class Main : MonoBehaviour {
 			// Update the score
 			UpdateScore();
 			// Add the entry to the undo stack
+
 			_undoManager.Push(new UndoEntry(_selectedLocation, _selectedIndex, _mouseLocation, _mouseIndex));
 
 			// If it was moved un select the card
@@ -192,7 +200,6 @@ public class Main : MonoBehaviour {
 		else {
 			// If they didn't click in a valid move area don't clear the selected card
 			if (location.Equals(Location.None)) { return; }
-			PrintErrorMessage();
 		}
 		
 	}
@@ -206,17 +213,6 @@ public class Main : MonoBehaviour {
 			
 			UpdateScore ();
 		}
-	}
-
-	// Print the bad move error message
-	void PrintErrorMessage() {
-		badMove.text = "That move was not valid";
-		Invoke ("RemoveMessage", 2);
-	}
-
-	// Remove the error message
-	void RemoveErrorMessage() {
-		badMove.text = "";
 	}
 
 	// Update the score and label
@@ -251,7 +247,7 @@ public class Main : MonoBehaviour {
 			break;
 		case Location.FreeCell:
 			// Select the only card in the free cell
-			card = freeCells[_mouseIndex].PeakCard();
+			card = freeCells[_mouseIndex].PeekCard();
 			break;
 		}
 		return card;
@@ -265,13 +261,13 @@ public class Main : MonoBehaviour {
 			print ("Trying to remove card at location none");
 			break;
 		case Location.Foundation:
-			card = foundations[_selectedIndex].RemoveTopCard();
+			card = foundations[index].RemoveTopCard();
 			break;
 		case Location.Tableau:
-			card = tableaus[_selectedIndex].RemoveTopCard();
+			card = tableaus[index].RemoveTopCard();
 			break;
 		case Location.FreeCell:
-			card = freeCells[_selectedIndex].RemoveCard();
+			card = freeCells[index].RemoveCard();
 			break;
 		}
 		return card;
@@ -291,22 +287,22 @@ public class Main : MonoBehaviour {
 				break;
 		case Location.Tableau:
 			// If the move is valid (or forced) then move it and set the flag
-			if (forced || tableaus[_mouseIndex].IsValidMove(card)) {
-				tableaus[_mouseIndex].AddCard(card);
+			if (forced || tableaus[index].IsValidMove(card)) {
+				tableaus[index].AddCard(card);
 				didMove = true;
 			}
 			break;
 			// If the move is valid (or forced) then move it and set the flag
 		case Location.Foundation:
-			if (forced || foundations[_mouseIndex].IsValidMove(card)) {
-				foundations[_mouseIndex].AddCard(card);
+			if (forced || foundations[index].IsValidMove(card)) {
+				foundations[index].AddCard(card);
 				didMove = true;
 			}
 			break;
 			// If the move is valid (or forced) move it and set the flag
 		case Location.FreeCell:
-			if (forced || freeCells[_mouseIndex].validMove) {
-				freeCells[_mouseIndex].AddCard(card);
+			if (forced || freeCells[index].validMove) {
+				freeCells[index].AddCard(card);
 				didMove = true;
 			}
 			break;
@@ -410,5 +406,11 @@ public class Main : MonoBehaviour {
 			this._toLocation = toLocation;
 			this._toIndex = toIndex;
 		}
+	}
+
+	// calls to this are made by the buttons
+	public void LoadMenu(int menuIndex) {
+		if (menuIndex == 0)
+			Application.LoadLevel ("_MainMenu"); 
 	}
 }

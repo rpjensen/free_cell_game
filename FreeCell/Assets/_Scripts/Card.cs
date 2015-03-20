@@ -4,8 +4,8 @@ using System.Collections;
 public enum Suit {
 	Club = 1,
 	Diamond,
-	Spade,
-	Heart
+	Heart,
+	Spade
 }
 
 public enum CardColor {
@@ -53,14 +53,14 @@ public class Card : MonoBehaviour {
 
 	//Method that checks if the card color is black
 	public CardColor WhichColor(){
-		int suitInt = (int)this.theSuit;
-		if (suitInt % 2 != 0) return CardColor.Black;
+		if (this.theSuit == Suit.Club || this.theSuit == Suit.Spade)
+			return CardColor.Black;
 		return CardColor.Red;
 	}
 
 	void OnMouseEnter() {
 		mouseInBounds = true;
-		}
+	}
 	void OnMouseExit(){
 		mouseInBounds = false;
 	}
