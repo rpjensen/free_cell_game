@@ -70,7 +70,7 @@ public class Main : MonoBehaviour {
 
 		// init the score label
 		scoreLabel = goScore.GetComponent<Text> ();
-		scoreLabel.text = "Score: 0";
+		scoreLabel.text = "Moves: 0";
 
 		// init the timer
 		timer = goTimer.GetComponent<Text> ();
@@ -227,8 +227,7 @@ public class Main : MonoBehaviour {
 	// Update the score and label
 	void UpdateScore() {
 		score++;
-		print ("Score updated: " + score);
-		scoreLabel.text = "Score: " + score;
+		scoreLabel.text = "Moves: " + score;
 	}
 
 	void EnableBadMove() {
