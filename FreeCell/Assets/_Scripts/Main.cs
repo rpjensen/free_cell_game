@@ -54,6 +54,9 @@ public class Main : MonoBehaviour {
 	private float _initTime;
 	private int _initDeckCount;
 
+	// Triggered when the game is over
+	private bool _gameOver = false;
+
 	// Init the internal resources
 	void Awake() {
 		_undoManager = new Stack<UndoEntry> ();
@@ -122,17 +125,19 @@ public class Main : MonoBehaviour {
 	// Update is called once per frame
 	void Update () {
 		// Get the elapsed game time
-		float deltaT = Time.realtimeSinceStartup - _initTime;
-		// cast to int
-		int time = Mathf.FloorToInt (deltaT);
-		int secs = time % 60;// get secs
-		string sSecs = secs < 10 ? "0"+secs : secs.ToString();// add second zero if needed
-		int mins = (time / 60) % 60;// get mins
-		string sMins = mins < 10 ? "0"+mins : mins.ToString();// add second zero if needed
-		int hours = time / 3600;// get hours
-		// Update timer
-		timer.text = "Time: " + hours+":"+sMins+":"+sSecs;
-
+		if (!_gameOver) {
+			float deltaT = Time.realtimeSinceStartup - _initTime;
+			// cast to int
+			int time = Mathf.FloorToInt (deltaT);
+			int secs = time % 60;// get secs
+			string sSecs = secs < 10 ? "0"+secs : secs.ToString();// add second zero if needed
+			int mins = (time / 60) % 60;// get mins
+			string sMins = mins < 10 ? "0"+mins : mins.ToString();// add second zero if needed
+			int hours = time / 3600;// get hours
+			// Update timer
+			timer.text = "Time: " + hours+":"+sMins+":"+sSecs;
+		}
+			
 		// If the mouse was clicked, dispatch to the appropriate function
 		if (Input.GetMouseButtonUp(0)) {
 			MouseClickDispatcher();
@@ -201,6 +206,7 @@ public class Main : MonoBehaviour {
 
 			if (GetRemainingCards() <= 0) {
 				goWinnerLabel.SetActive(true);
+				_gameOver = true;
 				Invoke("GameOver", 5);
 			}
 		}
@@ -246,6 +252,7 @@ public class Main : MonoBehaviour {
 		foreach (Foundation foundation in this.foundations) {
 			count += foundation.GetCardCount();
 		}
+
 		return _initDeckCount - count;
 	}
 
