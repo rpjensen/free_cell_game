@@ -10,8 +10,6 @@ public enum Location {
 	None
 }
 
-
-
 // Ryan Jensen
 // CSCI 373 Game Programming : Free Cell
 // This class represents the core game logic which includes moving cards, undoing cards, and updating the ui elements
@@ -28,6 +26,7 @@ public class Main : MonoBehaviour {
 	public GameObject goUndoButton;
 	public GameObject goWinnerLabel;
 	public GameObject goValidMove;
+	public GameObject goAudioController;
 	public static bool gameStarted = false;
 
 	public bool _____________________;
@@ -54,6 +53,8 @@ public class Main : MonoBehaviour {
 	private float _initTime;
 	private int _initDeckCount;
 
+	private Audio AudioController;
+
 	// Triggered when the game is over
 	private bool _gameOver = false;
 
@@ -63,6 +64,7 @@ public class Main : MonoBehaviour {
 		tableaus = new List<Tableau>();
 		foundations = new List<Foundation>();
 		freeCells = new List<FreeCell>();
+		AudioController = goAudioController.GetComponent<Audio> ();
 	}
 
 	// Use this for initialization
@@ -119,6 +121,7 @@ public class Main : MonoBehaviour {
 			// col = (col + 1) % (tableaus.Count-1);
 		}
 		Main.gameStarted = true;
+		AudioController.NewGame ();
 	}
 	
 	// Update is called once per frame
@@ -189,6 +192,7 @@ public class Main : MonoBehaviour {
 		bool didMove = MoveCardToLocation(_selectedCard, location, _mouseIndex);// records whether the move was made
 		
 		if (didMove) {
+			AudioController.MoveCard();
 			// We have moved the card to the new location so remove it from the old location
 			RemoveCardAtLocation(_selectedLocation, _selectedIndex);
 			// Update the score
@@ -221,6 +225,7 @@ public class Main : MonoBehaviour {
 	// Undo the last move
 	void UndoMove() {
 		if (this.canUndo) {
+			AudioController.MoveCard();
 			UndoEntry entry = _undoManager.Pop ();
 			Card card = RemoveCardAtLocation (entry.toLocation, entry.toIndex);
 			MoveCardToLocation(card, entry.fromLocation, entry.fromIndex, true);
