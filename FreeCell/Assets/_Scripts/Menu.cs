@@ -35,6 +35,10 @@ public class Menu : MonoBehaviour {
 		targetColor = darkColor;
 		
 	}
+
+	public void CreditsPress(){
+		Application.LoadLevel ("_Credits");
+		}
 	
 	public void NoPress()
 		
