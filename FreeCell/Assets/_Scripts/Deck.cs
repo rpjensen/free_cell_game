@@ -30,10 +30,7 @@ public class Deck : MonoBehaviour {
 				cards.Add(tempCard); //adds card to the deck
 				}
 			}
-		cards = Shuffle (cards);
-
-
-				
+			
 	}
 
 	//method to draw a card

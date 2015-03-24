@@ -42,6 +42,9 @@ public class Main : MonoBehaviour {
 	// Undo stack
 	private Stack<UndoEntry> _undoManager;
 
+	// HighScore submission overlay
+	public Canvas ScoreCanvas;
+
 	// Holds a reference to the mouse click location and index (valid for a single update cycle)
 	private Location _mouseLocation;
 	private int _mouseIndex;
@@ -65,6 +68,7 @@ public class Main : MonoBehaviour {
 		foundations = new List<Foundation>();
 		freeCells = new List<FreeCell>();
 		AudioController = goAudioController.GetComponent<Audio> ();
+		ScoreCanvas.enabled = false;
 	}
 
 	// Use this for initialization
@@ -103,7 +107,7 @@ public class Main : MonoBehaviour {
 			freeCells.Add(go.GetComponent<FreeCell>());
 		}
 
-		// thourougly shuffle the deck
+		// thourougly shuffle the deck 
 		deck.Shuffle ();
 		deck.Shuffle ();
 		deck.Shuffle ();
@@ -211,7 +215,7 @@ public class Main : MonoBehaviour {
 			if (GetRemainingCards() <= 0) {
 				goWinnerLabel.SetActive(true);
 				_gameOver = true;
-				Invoke("GameOver", 5);
+				ScoreCanvas.enabled = true;
 			}
 		}
 		else {
@@ -388,6 +392,16 @@ public class Main : MonoBehaviour {
 		get {
 			return _undoManager.Count > 0;
 		}
+	}
+
+	public void GetUserInfoAndAddToScoreList(Text t) {
+		// this handles getting user info and adding it 
+		// to the high score list
+		string name = t.text;
+		string time = timer.text;
+		time = time.Replace ("Time: ", ""); // dirty but it works
+		HighScore.db_AddHighScore (name, score, time);
+		GameOver ();
 	}
 
 	// Reload the level
