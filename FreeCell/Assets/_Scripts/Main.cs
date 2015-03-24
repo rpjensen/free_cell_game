@@ -108,11 +108,13 @@ public class Main : MonoBehaviour {
 		}
 
 		// thourougly shuffle the deck 
+		/*
 		deck.Shuffle ();
 		deck.Shuffle ();
 		deck.Shuffle ();
 		deck.Shuffle ();
 		deck.Shuffle ();
+		*/ 
 
 		// deal the cards until they are all gone (add them to columns left to right)
 		int col = 0;
