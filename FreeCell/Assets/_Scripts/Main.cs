@@ -121,7 +121,8 @@ public class Main : MonoBehaviour {
 			// col = (col + 1) % (tableaus.Count-1);
 		}
 		Main.gameStarted = true;
-		AudioController.NewGame ();
+		AudioController.NewGame ();      // play a card stacking noise.
+		AudioController.AudioDisable (); // and then start the game with sounds off since they're kinda harsh.
 	}
 	
 	// Update is called once per frame
